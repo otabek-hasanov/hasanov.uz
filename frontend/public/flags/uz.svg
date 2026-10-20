@@ -1,0 +1,9 @@
+<svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="O'zbekiston bayrog'i">
+  <rect width="30" height="20" fill="#fff"/>
+  <rect width="30" height="6.2" y="0" fill="#0099b5"/>
+  <rect width="30" height="6.2" y="13.8" fill="#1eb53a"/>
+  <rect width="30" height="0.9" y="6.2" fill="#ce1126"/>
+  <rect width="30" height="0.9" y="12.9" fill="#ce1126"/>
+  <circle cx="5.2" cy="3.1" r="1.7" fill="#fff"/>
+  <circle cx="5.9" cy="3.1" r="1.4" fill="#0099b5"/>
+</svg>
