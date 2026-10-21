@@ -37,7 +37,6 @@ Route::mount('/api', function () {
     Route::get('/resume', [ResumeController::class, 'download']);
     Route::post('/contact', [ContactApiController::class, 'store'], [VerifyCsrfMiddleware::class]);
 
-    // --- Admin ---
     Route::post('/admin/login', [AdminAuthController::class, 'login']);
     Route::post('/admin/logout', [AdminAuthController::class, 'logout'], [AuthMiddleware::class]);
     Route::get('/admin/me', [AdminAuthController::class, 'me']);

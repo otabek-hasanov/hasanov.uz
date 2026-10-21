@@ -55,7 +55,6 @@ function useReveal2(onEnter) {
     );
     observer.observe(node);
     return () => observer.disconnect();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [node]);
   return setNode;
 }

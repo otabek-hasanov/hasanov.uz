@@ -1,17 +1,15 @@
 RewriteEngine On
 
-# Block access to sensitive application directories entirely
 RewriteRule ^(app|bootstrap|config|database|resources|routes|storage|vendor|node_modules|frontend)(/|$) - [F,L]
 
-# Block access to sensitive dotfiles and build/config files
 RewriteRule ^\.git(/|$) - [F,L]
 RewriteRule ^(\.env(\..*)?|composer\.(json|lock)|\.htaccess)$ - [F,L]
 
-# API requests and dynamically-generated SEO endpoints go through the PHP backend
 RewriteRule ^api(/|$) index.php [L]
 RewriteRule ^(robots\.txt|sitemap\.xml|manifest\.json)$ index.php [L]
 
-# Serve existing files/directories as-is (SPA build assets, favicons, uploads)
+RewriteRule ^$ /spa/index.html [L]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ /spa/index.html [L]

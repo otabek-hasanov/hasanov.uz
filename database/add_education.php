@@ -32,7 +32,6 @@ if ($existing) {
     echo "Inserted education: Najot Ta'lim\n";
 }
 
-// Keep the earlier generic placeholder from first bottom from showing alongside the real one.
 Database::table('educations')->where('institution', '=', 'Tashkent University')->delete();
 
 PortfolioService::flushCache();

@@ -25,7 +25,6 @@ function resizeToWebp(string $srcPath, string $destPath, int $w, int $h): void
 $root = dirname(__DIR__);
 $scratch = '/tmp/claude-1019/-var-www-hasanov-uz-usr-data-www-hasanov-uz/cd9b5b27-f2c5-4567-af73-9e9c860d615c/scratchpad';
 
-// Remove old sample project (files + DB row)
 $old = Database::table('projects')->where('slug', '=', 'portfolio-website')->first();
 if ($old) {
     if (!empty($old['cover_image'])) {

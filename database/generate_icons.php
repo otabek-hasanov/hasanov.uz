@@ -20,7 +20,6 @@ function makeIcon(int $size): string
 
     $radius = (int) ($size * 0.22);
     imagefilledrectangle($img, 0, 0, $size, $size, IMG_COLOR_TRANSPARENT);
-    // redraw rounded-rect mask via corners trick: simplest is just filled rounded rect using imagefilledellipse corners
     $mask = imagecreatetruecolor($size, $size);
     imagesavealpha($mask, true);
     imagefill($mask, 0, 0, imagecolorallocatealpha($mask, 0, 0, 0, 127));

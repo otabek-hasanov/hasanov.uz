@@ -12,10 +12,7 @@ final class AuthMiddleware implements MiddlewareInterface
     public function handle(Request $request, callable $next): Response
     {
         if (!Auth::check()) {
-            if ($request->wantsJson()) {
-                return Response::json(['message' => 'Unauthenticated'], 401);
-            }
-            return Response::redirect('/admin/login');
+            return Response::json(['message' => 'Unauthenticated'], 401);
         }
         return $next($request);
     }

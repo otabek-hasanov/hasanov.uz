@@ -35,7 +35,6 @@ export default function Navbar() {
     return () => document.removeEventListener('click', close);
   }, [langOpen]);
 
-  // Preserve current page + hash when switching locale.
   const currentPathAfterLocale = location.pathname.replace(/^\/[a-z]{2}(\/|$)/, '/');
   function langHref(loc) {
     const base = localePath(loc, currentPathAfterLocale);
