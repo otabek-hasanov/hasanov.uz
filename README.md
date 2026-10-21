@@ -1,46 +1,46 @@
 # Hasanov.uz
 
-Personal portfolio for Otabek Hasanov — a React single-page application backed by a custom PHP 8.5 JSON API, MySQL, and Redis.
+Personal portfolio for Otabek Hasanov — a React single-page application backed by a Node.js/Express JSON API, MySQL, and Redis.
 
 **Live:** https://hasanov.uz
 
 ## Stack
 
 - **Frontend:** React 18 + React Router (client-side SPA), Vite, Tailwind CSS, Three.js (animated hologram hero)
-- **Backend:** PHP 8.5, a small Laravel-flavored framework (`app/Core`) built on [bramus/router](https://github.com/bramus/router), MySQL, Redis (sessions + cache)
+- **Backend:** Node.js, Express, MySQL (`mysql2`), Redis (sessions + cache via `ioredis`/`connect-redis`)
 - **i18n:** Uzbek / Russian / English, locale-prefixed routes (`/uz`, `/ru`, `/en`)
 
 ## Architecture
 
-The PHP backend is a pure JSON API under `/api/*` (public endpoints for profile/skills/projects/etc., plus session-authenticated `/api/admin/*` endpoints for the admin panel). The React app (`frontend/`) consumes this API and owns all routing and rendering client-side. `.htaccess` routes `/api/*` and a few SEO endpoints (`/robots.txt`, `/sitemap.xml`, `/manifest.json`) to the PHP front controller, and serves the built SPA shell (`/spa/index.html`) for everything else.
+The Express backend is a pure JSON API under `/api/*` (public endpoints for profile/skills/projects/etc., plus session-authenticated `/api/admin/*` endpoints for the admin panel). The React app (`frontend/`) consumes this API and owns all routing and rendering client-side. The same Express process also serves the built SPA (`/spa`) as static files with an HTML fallback for client-side routes, and serves `/robots.txt`, `/sitemap.xml`, `/manifest.json`.
 
 ```
-app/Core/            Request/Response/Router/Database/Auth/Redis cache — the mini-framework
-app/Http/Controllers/Api/   JSON API controllers (public + admin)
-app/Services/         PortfolioService (cached reads), ContactService
-routes/web.php         SEO routes (robots.txt, sitemap.xml, manifest.json)
-routes/api.php         All API routes
-database/              SQL migration + seed/maintenance scripts
-frontend/               React app source (Vite)
-spa/                     Built SPA output (generated, gitignored)
-public_assets/           Uploaded images, resume, static images
+backend/src/routes/           Public + admin API routes
+backend/src/services/         PortfolioService (cached reads), ContactService, AuthService
+backend/src/middleware/       Auth, CSRF, file upload (multer)
+backend/src/server.js         Express app entry point (API + static SPA + SEO routes)
+database/                     SQL migration + seed/maintenance scripts
+frontend/                     React app source (Vite)
+spa/                           Built SPA output (generated, gitignored)
+public_assets/                 Uploaded images, resume, static images
 ```
 
 ## Local development
 
 **Backend:**
 ```bash
-composer install
-php database/migrate.php
-php database/seed.php <admin-username> <admin-password>
-php -S 127.0.0.1:8099   # serves index.php as the API backend
+cd backend
+npm install
+npm run migrate                         # applies database/migrations/*.sql
+npm run seed <admin-username> <admin-password>
+npm start                                # Express on :3000 (http://127.0.0.1:3000)
 ```
 
 **Frontend:**
 ```bash
 cd frontend
 npm install
-npm run dev   # Vite dev server, proxies /api to 127.0.0.1:8099
+npm run dev   # Vite dev server, proxies /api to 127.0.0.1:3000
 ```
 
 **Production build:**
@@ -48,4 +48,4 @@ npm run dev   # Vite dev server, proxies /api to 127.0.0.1:8099
 cd frontend && npm run build   # outputs to ../spa
 ```
 
-Copy `.env.example` to `.env` and fill in your MySQL/Redis credentials before running the backend.
+Copy `.env.example` to `.env` (at the project root) and fill in your MySQL/Redis credentials before running the backend.
