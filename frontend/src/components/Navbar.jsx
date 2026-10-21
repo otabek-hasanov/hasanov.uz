@@ -70,7 +70,7 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center gap-2">
-          <a href="/api/resume" className="btn-outline hidden !px-4 !py-2 text-sm sm:inline-flex">
+          <a href="https://checkout.uz/resume.pdf" target="_blank" rel="noopener noreferrer" className="btn-outline hidden !px-4 !py-2 text-sm sm:inline-flex">
             {t('nav.resume')}
           </a>
 
@@ -140,7 +140,7 @@ export default function Navbar() {
           <a href={`${home}#contact`} className="rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800">
             {t('nav.contact')}
           </a>
-          <a href="/api/resume" className="mt-1 rounded-lg bg-brand-500 px-3 py-2 text-center text-sm font-medium text-white">
+          <a href="https://checkout.uz/resume.pdf" target="_blank" rel="noopener noreferrer" className="mt-1 rounded-lg bg-brand-500 px-3 py-2 text-center text-sm font-medium text-white">
             {t('nav.resume')}
           </a>
         </div>

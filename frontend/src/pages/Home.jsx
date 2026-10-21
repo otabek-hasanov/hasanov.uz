@@ -207,11 +207,9 @@ export default function Home() {
                   </div>
                 )}
               </div>
-              {profile?.has_resume && (
-                <a href="/api/resume" className="btn-primary mt-8">
-                  {t('about.download_resume')}
-                </a>
-              )}
+              <a href="https://checkout.uz/resume.pdf" target="_blank" rel="noopener noreferrer" className="btn-primary mt-8">
+                {t('about.download_resume')}
+              </a>
             </div>
 
             <div className="reveal is-visible grid grid-cols-3 gap-4 self-start lg:col-span-3 lg:grid-cols-1">
